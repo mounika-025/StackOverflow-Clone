@@ -21,7 +21,7 @@ const Widget = () => {
           <p>Podcast 374: How valuable is your screen name?</p>
         </div>
       </div>
-      <h4>Featured on Meta</h4>
+      <h4 className="blog-heading">Featured on Meta</h4>
       <div className="right-container-1">
         <div className="right-container-2">
           <img src={comment} alt="pen" width="18" />
@@ -40,7 +40,7 @@ const Widget = () => {
           </p>
         </div>
       </div>
-      <h4>Hot Meta Posts</h4>
+      <h4 className="blog-heading">Hot Meta Posts</h4>
       <div className="right-container-1">
         <div className="right-container-2">
           <p>38</p>
