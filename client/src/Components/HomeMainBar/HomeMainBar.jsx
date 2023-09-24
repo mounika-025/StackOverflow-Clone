@@ -1,11 +1,24 @@
 import React from "react";
 // eslint-disable-next-line no-unused-vars
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "./HomeMainBar.css";
 import QuestionsList from "./QuestionsList";
 const HomeMainBar = () => {
   const location = useLocation();
+
+  const user = 1;
+  const navigate = useNavigate();
+
+  const checkLogin = () => {
+    if (user === null) {
+      alert("Please login or sign up to ask a question");
+      navigate("/Auth");
+    } else {
+      navigate("/AskQuestion");
+    }
+  };
+
   // eslint-disable-next-line no-unused-vars
   const questionsList = [
     {
@@ -77,9 +90,9 @@ const HomeMainBar = () => {
         ) : (
           <h1>All Questions</h1>
         )}
-        <Link to="/AskQuestion" className="ask-button">
+        <button onClick={checkLogin} className="ask-button">
           Ask Question
-        </Link>
+        </button>
       </div>
       <div>
         {questionsList === null ? (
