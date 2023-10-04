@@ -27,7 +27,7 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { password, email } = req.body;
+  const { email, password } = req.body;
   try {
     const existingUser = await users.findOne({ email });
     if (!existingUser) {
@@ -40,10 +40,14 @@ export const login = async (req, res) => {
     if (!isPasswordConfirmed) {
       return res.status(400).json({ message: "Password is not correct" });
     }
-    const token = jwt.sign({ email: newUser.email, id: newUser._id }, "test", {
-      expiresIn: "1hr",
-    }); // token for authentication
-    res.status(200).json({ result: newUser, token }); //sending response to frontend
+    const token = jwt.sign(
+      { email: existingUser.email, id: existingUser._id },
+      "test",
+      {
+        expiresIn: "1hr",
+      }
+    ); // token for authentication
+    res.status(200).json({ result: existingUser, token }); //sending response to frontend
   } catch (error) {
     res.status(500).json("something went wrong...");
   }
