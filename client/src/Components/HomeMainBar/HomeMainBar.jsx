@@ -1,6 +1,7 @@
 import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import "./HomeMainBar.css";
 import QuestionsList from "./QuestionsList";
@@ -9,6 +10,9 @@ const HomeMainBar = () => {
 
   const user = 1;
   const navigate = useNavigate();
+
+  const questionsList = useSelector((state) => state.questionsReducer);
+  console.log(questionsList);
 
   const checkLogin = () => {
     if (user === null) {
@@ -20,121 +24,122 @@ const HomeMainBar = () => {
   };
 
   // eslint-disable-next-line no-unused-vars
-  const questionsList = [
-    {
-      _id: 1,
-      upVotes: 4,
-      downVotes: 2,
-      noOfAnswers: 3,
-      questionTitle: "what is function?",
-      questionBody: "it meant to be",
-      questionTags: ["js", "react"],
-      userPosted: "grey",
-      askedOn: "1 sep",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "cristina",
-          answeredOn: "10 sep",
-          userId: 1,
-        },
-      ],
-    },
-    {
-      _id: 2,
-      upVotes: 4,
-      downVotes: 2,
-      noOfAnswers: 0,
-      questionTitle: "what is function?",
-      questionBody: "it meant to be",
-      questionTags: ["js", "react"],
-      userPosted: "grey",
-      askedOn: "2min ago",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "cristina",
-          answeredOn: "10 sep",
-          userId: 2,
-        },
-      ],
-    },
-    {
-      _id: 3,
-      upVotes: 4,
-      downVotes: 2,
-      noOfAnswers: 0,
-      questionTitle: "what is function?",
-      questionBody: "it meant to be",
-      questionTags: ["js", "react"],
-      userPosted: "grey",
-      askedOn: "2min ago",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "cristina",
-          answeredOn: "10 sep",
-          userId: 3,
-        },
-      ],
-    },
-    {
-      _id: 4,
-      upVotes: 4,
-      downVotes: 2,
-      noOfAnswers: 0,
-      questionTitle: "what is function?",
-      questionBody: "it meant to be",
-      questionTags: ["js", "react"],
-      userPosted: "grey",
-      askedOn: "2min ago",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "cristina",
-          answeredOn: "10 sep",
-          userId: 4,
-        },
-      ],
-    },
-    {
-      _id: 5,
-      upVotes: 4,
-      downVotes: 2,
-      noOfAnswers: 0,
-      questionTitle: "what is function?",
-      questionBody: "it meant to be",
-      questionTags: ["js", "react"],
-      userPosted: "grey",
-      askedOn: "2min ago",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "cristina",
-          answeredOn: "10 sep",
-          userId: 5,
-        },
-      ],
-    },
-    {
-      _id: 6,
-      upVotes: 4,
-      downVotes: 2,
-      questionTitle: "what is function?",
-      questionBody: "it meant to be",
-      questionTags: ["js", "react"],
-      userPosted: "grey",
-      askedOn: "2min ago",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "cristina",
-          answeredOn: "10 sep",
-          userId: 6,
-        },
-      ],
-    },
-  ];
+  // const questionsList = [
+  //   {
+  //     _id: 1,
+  //     upVotes: 4,
+  //     downVotes: 2,
+  //     noOfAnswers: 3,
+  //     questionTitle: "what is function?",
+  //     questionBody: "it meant to be",
+  //     questionTags: ["js", "react"],
+  //     userPosted: "grey",
+  //     askedOn: "1 sep",
+  //     answer: [
+  //       {
+  //         answerBody: "Answer",
+  //         userAnswered: "cristina",
+  //         answeredOn: "10 sep",
+  //         userId: 1,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     _id: 2,
+  //     upVotes: 4,
+  //     downVotes: 2,
+  //     noOfAnswers: 0,
+  //     questionTitle: "what is function?",
+  //     questionBody: "it meant to be",
+  //     questionTags: ["js", "react"],
+  //     userPosted: "grey",
+  //     askedOn: "2min ago",
+  //     answer: [
+  //       {
+  //         answerBody: "Answer",
+  //         userAnswered: "cristina",
+  //         answeredOn: "10 sep",
+  //         userId: 2,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     _id: 3,
+  //     upVotes: 4,
+  //     downVotes: 2,
+  //     noOfAnswers: 0,
+  //     questionTitle: "what is function?",
+  //     questionBody: "it meant to be",
+  //     questionTags: ["js", "react"],
+  //     userPosted: "grey",
+  //     askedOn: "2min ago",
+  //     answer: [
+  //       {
+  //         answerBody: "Answer",
+  //         userAnswered: "cristina",
+  //         answeredOn: "10 sep",
+  //         userId: 3,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     _id: 4,
+  //     upVotes: 4,
+  //     downVotes: 2,
+  //     noOfAnswers: 0,
+  //     questionTitle: "what is function?",
+  //     questionBody: "it meant to be",
+  //     questionTags: ["js", "react"],
+  //     userPosted: "grey",
+  //     askedOn: "2min ago",
+  //     answer: [
+  //       {
+  //         answerBody: "Answer",
+  //         userAnswered: "cristina",
+  //         answeredOn: "10 sep",
+  //         userId: 4,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     _id: 5,
+  //     upVotes: 4,
+  //     downVotes: 2,
+  //     noOfAnswers: 0,
+  //     questionTitle: "what is function?",
+  //     questionBody: "it meant to be",
+  //     questionTags: ["js", "react"],
+  //     userPosted: "grey",
+  //     askedOn: "2min ago",
+  //     answer: [
+  //       {
+  //         answerBody: "Answer",
+  //         userAnswered: "cristina",
+  //         answeredOn: "10 sep",
+  //         userId: 5,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     _id: 6,
+  //     upVotes: 4,
+  //     downVotes: 2,
+  //     questionTitle: "what is function?",
+  //     questionBody: "it meant to be",
+  //     questionTags: ["js", "react"],
+  //     userPosted: "grey",
+  //     askedOn: "2min ago",
+  //     answer: [
+  //       {
+  //         answerBody: "Answer",
+  //         userAnswered: "cristina",
+  //         answeredOn: "10 sep",
+  //         userId: 6,
+  //       },
+  //     ],
+  //   },
+  // ];
+
   return (
     <div className="main-bar">
       <div className="main-header">
@@ -148,12 +153,12 @@ const HomeMainBar = () => {
         </button>
       </div>
       <div>
-        {questionsList === null ? (
+        {questionsList.data === null ? (
           <h1>Loading...</h1>
         ) : (
           <>
-            <p>{questionsList.length}questions</p>
-            <QuestionsList questionsList={questionsList} />
+            <p>{questionsList.data.length}questions</p>
+            <QuestionsList questionsList={questionsList.data} />
           </>
         )}
       </div>

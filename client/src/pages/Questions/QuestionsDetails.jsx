@@ -5,134 +5,20 @@ import downvote from "../../assests/sort-down.svg";
 
 import Avatar from "../../Components/Avatar/Avatar";
 import DisplayAnswer from "./DisplayAnswer";
+import { useSelector } from "react-redux";
 
 import "./Questions.css";
 
 const QuestionDetails = () => {
   const { id } = useParams();
-
-  const questionsList = [
-    {
-      _id: "1",
-      upVotes: 4,
-      downVotes: 2,
-      noOfAnswers: 3,
-      questionTitle: "what is function?",
-      questionBody: "it meant to be",
-      questionTags: ["js", "react"],
-      userPosted: "grey",
-      askedOn: "1 sep",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "cristina",
-          answeredOn: "10 sep",
-          userId: 1,
-        },
-      ],
-    },
-    {
-      _id: "2",
-      upVotes: 4,
-      downVotes: 2,
-      noOfAnswers: 0,
-      questionTitle: "what is function?",
-      questionBody: "it meant to be",
-      questionTags: ["js", "react"],
-      userPosted: "grey",
-      askedOn: "2min ago",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "cristina",
-          answeredOn: "10 sep",
-          userId: 2,
-        },
-      ],
-    },
-    {
-      _id: "3",
-      upVotes: 4,
-      downVotes: 2,
-      noOfAnswers: 0,
-      questionTitle: "what is function?",
-      questionBody: "it meant to be",
-      questionTags: ["js", "react"],
-      userPosted: "grey",
-      askedOn: "2min ago",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "cristina",
-          answeredOn: "10 sep",
-          userId: 3,
-        },
-      ],
-    },
-    {
-      _id: "4",
-      upVotes: 4,
-      downVotes: 2,
-      noOfAnswers: 0,
-      questionTitle: "what is function?",
-      questionBody: "it meant to be",
-      questionTags: ["js", "react"],
-      userPosted: "grey",
-      askedOn: "2min ago",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "cristina",
-          answeredOn: "10 sep",
-          userId: 4,
-        },
-      ],
-    },
-    {
-      _id: "5",
-      upVotes: 4,
-      downVotes: 2,
-      noOfAnswers: 0,
-      questionTitle: "what is function?",
-      questionBody: "it meant to be",
-      questionTags: ["js", "react"],
-      userPosted: "grey",
-      askedOn: "2min ago",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "cristina",
-          answeredOn: "10 sep",
-          userId: 5,
-        },
-      ],
-    },
-    {
-      _id: "6",
-      upVotes: 4,
-      downVotes: 2,
-      questionTitle: "what is function?",
-      questionBody: "it meant to be",
-      questionTags: ["js", "react"],
-      userPosted: "grey",
-      askedOn: "2min ago",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "cristina",
-          answeredOn: "10 sep",
-          userId: 6,
-        },
-      ],
-    },
-  ];
+  const questionsList = useSelector((state) => state.questionsReducer);
   return (
     <div className="question-details-page">
-      {questionsList === null ? (
+      {questionsList.data === null ? (
         <h1>Loading...</h1>
       ) : (
         <>
-          {questionsList
+          {questionsList.data
             .filter((question) => question._id === id)
             .map((question) => (
               <div key={question._id}>
