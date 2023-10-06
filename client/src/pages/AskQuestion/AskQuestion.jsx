@@ -1,11 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./AskQuestion.css";
+import { askQuestion } from "../../actions/question";
+
 const AskQuestion = () => {
+  const [questionTitle, setQuestionTitle] = useState("");
+  const [questionBody, setQuestionBody] = useState("");
+  const [questionTags, setQuestionTags] = useState("");
+
+  const dispatch = useDispatch();
+  const User = useSelector((state) => state.currentUserReducer);
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      askQuestion(
+        {
+          questionTitle,
+          questionBody,
+          questionTags,
+          userPosted: User.result.name,
+        },
+        navigate
+      )
+    );
+  };
+
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      setQuestionBody(questionBody + "\n");
+    }
+  };
+
   return (
     <div className="ask-question-container">
       <div className="ask-question-card">
         <h1>Ask a public question</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="ask-ques-form-container">
             <label htmlFor="ask-question-title">
               <h4>Title</h4>
@@ -16,9 +49,9 @@ const AskQuestion = () => {
               <input
                 type="text"
                 id="ask-ques-title"
-                // onChange={(e) => {
-                //   setQuestionTitle(e.target.value);
-                // }}
+                onChange={(e) => {
+                  setQuestionTitle(e.target.value);
+                }}
                 placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
               />
             </label>
@@ -31,12 +64,12 @@ const AskQuestion = () => {
               <textarea
                 name=""
                 id="ask-ques-body"
-                // onChange={(e) => {
-                //   setQuestionBody(e.target.value);
-                // }}
+                onChange={(e) => {
+                  setQuestionBody(e.target.value);
+                }}
                 cols="30"
                 rows="10"
-                // onKeyPress={handleEnter}
+                onKeyPress={handleEnter}
               ></textarea>
             </label>
             <label htmlFor="ask-ques-tags">
@@ -45,9 +78,9 @@ const AskQuestion = () => {
               <input
                 type="text"
                 id="ask-ques-tags"
-                // onChange={(e) => {
-                //   setQuestionTags(e.target.value.split(" "));
-                // }}
+                onChange={(e) => {
+                  setQuestionTags(e.target.value.split(" "));
+                }}
                 placeholder="e.g. (xml typescript wordpress)"
               />
             </label>
