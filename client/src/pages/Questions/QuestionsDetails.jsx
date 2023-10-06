@@ -1,17 +1,58 @@
-import React from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import moment from "moment";
+import copy from "copy-to-clipboard";
+
 import upvote from "../../assests/sort-up.svg";
 import downvote from "../../assests/sort-down.svg";
 
 import Avatar from "../../Components/Avatar/Avatar";
 import DisplayAnswer from "./DisplayAnswer";
-import { useSelector } from "react-redux";
+
+import { postAnswer } from "../../actions/question";
 
 import "./Questions.css";
 
 const QuestionDetails = () => {
   const { id } = useParams();
   const questionsList = useSelector((state) => state.questionsReducer);
+  console.log(questionsList);
+
+  const [answer, setAnswer] = useState("");
+  const Navigate = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const url = "http/localhost:3000";
+
+  const User = useSelector((state) => state.currentUserReducer);
+
+  const handlePostAnswer = (e, answerLength) => {
+    e.preventDefault();
+    if (User === null) {
+      alert("Login or SignUp to answer a Question");
+      Navigate("/auth");
+    } else {
+      if (answer === "") {
+        alert("Enter an answer before submitting");
+      } else {
+        dispatch(
+          postAnswer({
+            id,
+            noOfAnswers: answerLength + 1,
+            answerBody: answer,
+            userAnswered: User.result.name,
+          })
+        );
+      }
+    }
+  };
+
+  const handleShare = () => {
+    copy(url + location.pathname);
+    alert("Copied Url: " + url + location.pathname);
+  };
+
   return (
     <div className="question-details-page">
       {questionsList.data === null ? (
@@ -50,11 +91,13 @@ const QuestionDetails = () => {
                       <div className="question-actions-user">
                         <div>
                           {" "}
-                          <button type="button">Share</button>
+                          <button type="button" onClick={handleShare}>
+                            Share
+                          </button>
                           <button type="button">Delete</button>
                         </div>
                         <div>
-                          <p>Asked {question.askedOn}</p>
+                          <p>Asked {moment(question.askedOn).fromNow()}</p>
                           <Link
                             to={`/User/${question.userId}`}
                             className="user-link"
@@ -78,13 +121,27 @@ const QuestionDetails = () => {
                 {question.noOfAnswers !== 0 && (
                   <section>
                     <h3>{question.noOfAnswers} Answers</h3>
-                    <DisplayAnswer key={question._id} question={question} />
+                    <DisplayAnswer
+                      key={question._id}
+                      question={question}
+                      handleShare={handleShare}
+                    />
                   </section>
                 )}
                 <section className="post-ans-container">
                   <h3>Your Answer</h3>
-                  <form>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                  <form
+                    onSubmit={(e) => {
+                      handlePostAnswer(e, question.answer.length);
+                    }}
+                  >
+                    <textarea
+                      name=""
+                      id=""
+                      cols="30"
+                      rows="10"
+                      onChange={(e) => setAnswer(e.target.value)}
+                    ></textarea>
                     <br />
                     <input
                       type="submit"

@@ -11,7 +11,7 @@ import { setCurrentUser } from "../../actions/currentUser";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  var user = useSelector((state) => state.currentUserReducer);
+  var User = useSelector((state) => state.currentUserReducer);
 
   useEffect(() => {
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
@@ -37,7 +37,7 @@ const Navbar = () => {
           <img className="search-icon" src={search} alt="Search" width="18" />
         </form>
 
-        {user === null ? (
+        {User === null ? (
           <Link to="/Auth" className="nav-item nav-links">
             Log in
           </Link>
@@ -50,10 +50,10 @@ const Navbar = () => {
               borderRadius="50%"
             >
               <Link
-                to="/User"
+                to={`/Users/${User?.result?._id}`}
                 style={{ color: "#ffffff", textDecoration: "none" }}
               >
-                M{" "}
+                {User.result.name.charAt(0).toUpperCase()}
               </Link>
             </Avatar>
             <button className="nav-item nav-links">Log out</button>
