@@ -10,7 +10,7 @@ import downvote from "../../assests/sort-down.svg";
 import Avatar from "../../Components/Avatar/Avatar";
 import DisplayAnswer from "./DisplayAnswer";
 
-import { postAnswer } from "../../actions/question";
+import { postAnswer, deleteQuestion } from "../../actions/question";
 
 import "./Questions.css";
 
@@ -42,6 +42,7 @@ const QuestionDetails = () => {
             noOfAnswers: answerLength + 1,
             answerBody: answer,
             userAnswered: User.result.name,
+            userId: User.result._id,
           })
         );
       }
@@ -52,7 +53,9 @@ const QuestionDetails = () => {
     copy(url + location.pathname);
     alert("Copied Url: " + url + location.pathname);
   };
-
+  const handleDelete = () => {
+    dispatch(deleteQuestion(id, Navigate));
+  };
   return (
     <div className="question-details-page">
       {questionsList.data === null ? (
@@ -94,7 +97,11 @@ const QuestionDetails = () => {
                           <button type="button" onClick={handleShare}>
                             Share
                           </button>
-                          <button type="button">Delete</button>
+                          {User?.result?._id === question?.userId && (
+                            <button type="button" onClick={handleDelete}>
+                              Delete
+                            </button>
+                          )}
                         </div>
                         <div>
                           <p>Asked {moment(question.askedOn).fromNow()}</p>
