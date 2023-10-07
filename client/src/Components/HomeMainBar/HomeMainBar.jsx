@@ -157,7 +157,7 @@ const HomeMainBar = () => {
           <h1>Loading...</h1>
         ) : (
           <>
-            <p>{questionsList.data.length}questions</p>
+            <p>{questionsList.data.length} questions</p>
             <QuestionsList questionsList={questionsList.data} />
           </>
         )}
