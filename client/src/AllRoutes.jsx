@@ -6,6 +6,8 @@ import Questions from "./pages/Questions/Questions";
 import DisplayQuestion from "./pages/Questions/DisplayQuestions";
 import { Routes, Route } from "react-router-dom";
 import Tags from "./pages/Tags/Tags";
+import Users from "./pages/Users/Users";
+import UserProfile from "./pages/UserProfile/UserProfile";
 
 const AllRoutes = () => {
   return (
@@ -16,6 +18,8 @@ const AllRoutes = () => {
       <Route path="/AskQuestion" element={<AskQuestion />} />
       <Route path="/Questions/:id" element={<DisplayQuestion />} />
       <Route path="/Tags" element={<Tags />} />
+      <Route path="/Users" element={<Users />} />
+      <Route path="/Users/:id" element={<UserProfile />} />
     </Routes>
   );
 };

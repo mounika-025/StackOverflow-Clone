@@ -5,6 +5,7 @@ export const AskQuestion = async (req, res) => {
   const postQuestionData = req.body;
   const postQuestion = new Questions({
     ...postQuestionData,
+    userId,
   });
 
   try {
