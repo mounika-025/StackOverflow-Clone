@@ -48,9 +48,7 @@ const DisplayAnswer = ({ question, handleShare }) => {
                   py="5px"
                   borderRadius="4px"
                 >
-                  {ans.userAnswered && ans.userAnswered.length > 0
-                    ? ans.userAnswered.charAt(0).toUpperCase()
-                    : ""}
+                  {ans.userAnswered.charAt(0).toUpperCase()}
                 </Avatar>
                 <div>{ans.userAnswered}</div>
               </Link>

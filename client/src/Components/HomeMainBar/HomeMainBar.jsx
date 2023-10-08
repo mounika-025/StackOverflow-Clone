@@ -12,7 +12,6 @@ const HomeMainBar = () => {
   const navigate = useNavigate();
 
   const questionsList = useSelector((state) => state.questionsReducer);
-  console.log(questionsList);
 
   const checkLogin = () => {
     if (user === null) {

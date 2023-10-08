@@ -21,7 +21,6 @@ import "./Questions.css";
 const QuestionDetails = () => {
   const { id } = useParams();
   const questionsList = useSelector((state) => state.questionsReducer);
-  console.log(questionsList);
 
   const [answer, setAnswer] = useState("");
   const Navigate = useNavigate();

@@ -17,9 +17,13 @@ export const signup = async (req, res) => {
       email,
       password: hashedPassword,
     });
-    const token = jwt.sign({ email: newUser.email, id: newUser._id }, "test", {
-      expiresIn: "1hr",
-    }); // token for authentication
+    const token = jwt.sign(
+      { email: newUser.email, id: newUser._id },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1hr",
+      }
+    ); // token for authentication
     res.status(200).json({ result: newUser, token }); //sending response to frontend
   } catch (error) {
     res.status(500).json("something went wrong...");
@@ -42,7 +46,7 @@ export const login = async (req, res) => {
     }
     const token = jwt.sign(
       { email: existingUser.email, id: existingUser._id },
-      "test",
+      process.env.JWT_SECRET,
       {
         expiresIn: "1hr",
       }
